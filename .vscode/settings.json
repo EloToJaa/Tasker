@@ -1,0 +1,10 @@
+{
+    "prettier.configPath": "./app/prettier.config.mjs",
+    "prettier.ignorePath": "./app/.prettierignore",
+    "eslint.experimental.useFlatConfig": true,
+    "eslint.workingDirectories": [
+        "./app",
+	],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+}
