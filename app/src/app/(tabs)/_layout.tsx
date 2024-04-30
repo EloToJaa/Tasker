@@ -1,8 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
-import React from "react";
 
-export default function TabLayout() {
+export default function Layout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
       <Tabs.Screen
@@ -24,12 +23,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="(drawer)"
+        name="calendar"
         options={{
-          title: "Drawer",
+          title: "Calendar",
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="cog" color={color} />
+            <FontAwesome size={28} name="calendar" color={color} />
           ),
         }}
       />

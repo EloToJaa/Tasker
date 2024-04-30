@@ -1,14 +1,18 @@
 import { Link } from "expo-router";
-import { useState } from "react";
-import { ScrollView, Text } from "react-native";
+import { useTranslation } from "react-i18next";
+import { Button, ScrollView, Text } from "react-native";
 
 export default function Page() {
-  const [text, setText] = useState("");
+  const { t, i18n } = useTranslation();
 
   return (
     <ScrollView>
-      <Text className="text-3xl text-picton-blue-600">Page</Text>
-      <Link href="/users/1">
+      <Text className="text-3xl text-picton-blue-600">
+        {t("common.welcome")}
+      </Text>
+      <Button onPress={() => i18n.changeLanguage("en")} title="English" />
+      <Button onPress={() => i18n.changeLanguage("pl")} title="Polish" />
+      <Link href="/(drawer)">
         <Text className="text-picton-blue-600 text-3xl">User 1</Text>
       </Link>
       <Text className="text-blue-600 text-xl">User 2</Text>
