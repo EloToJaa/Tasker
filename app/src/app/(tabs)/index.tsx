@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <ScrollView>
       <Text className="text-3xl text-picton-blue-600">Page</Text>
-      <Link href="/users/1">
+      <Link href="/(drawer)">
         <Text className="text-picton-blue-600 text-3xl">User 1</Text>
       </Link>
       <Text className="text-blue-600 text-xl">User 2</Text>
