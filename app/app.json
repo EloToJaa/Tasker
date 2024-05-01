@@ -9,10 +9,7 @@
     },
     "plugins": [
       [
-        "expo-router",
-        {
-          "origin": "https://n"
-        }
+        "expo-router"
       ]
     ],
     "name": "tasker",

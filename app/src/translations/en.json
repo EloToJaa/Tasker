@@ -2,5 +2,7 @@
   "common": {
     "welcome": "Welcome to the app 1!"
   },
-  "welcome": "Welcome to the app 2!"
+  "auth": {
+    
+  }
 }

@@ -14,21 +14,21 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="test"
-        options={{
-          title: "Test",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="cog" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="calendar"
         options={{
           title: "Calendar",
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="calendar" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="cog" color={color} />
           ),
         }}
       />
