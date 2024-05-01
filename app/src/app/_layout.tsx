@@ -1,3 +1,4 @@
+import ThemeProvider from "@/components/ThemeProvider";
 import "@/lib/i18n";
 import * as Notifications from "expo-notifications";
 import { Stack } from "expo-router";
@@ -14,11 +15,12 @@ Notifications.setNotificationHandler({
 
 export default function Layout() {
   return (
-    <>
+    <ThemeProvider name="default">
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack>
       <StatusBar backgroundColor="#161622" style="light" />
-    </>
+    </ThemeProvider>
   );
 }

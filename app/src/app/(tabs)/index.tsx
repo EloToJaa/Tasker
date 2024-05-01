@@ -1,19 +1,28 @@
 import { Link } from "expo-router";
+import { useColorScheme } from "nativewind";
 import { useTranslation } from "react-i18next";
 import { Button, ScrollView, Text } from "react-native";
 
 export default function Page() {
   const { t, i18n } = useTranslation();
+  const { colorScheme, setColorScheme } = useColorScheme();
 
   return (
     <ScrollView>
-      <Text className="text-3xl text-picton-blue-600">
-        {t("common.welcome")}
-      </Text>
+      <Button
+        onPress={() =>
+          setColorScheme(colorScheme === "light" ? "dark" : "light")
+        }
+        title="Change color scheme"
+      />
       <Button onPress={() => i18n.changeLanguage("en")} title="English" />
       <Button onPress={() => i18n.changeLanguage("pl")} title="Polish" />
-      <Link href="/(drawer)">
-        <Text className="text-picton-blue-600 text-3xl">User 1</Text>
+
+      <Text className="text-3xl text-primary">{t("common.welcome")}</Text>
+
+      <Text className="text-3xl text-secondary">{t("common.welcome")}</Text>
+      <Link href="/(auth)/sign-in">
+        <Text className="text-picton-blue-600 text-3xl">Sign In</Text>
       </Link>
       <Text className="text-blue-600 text-xl">User 2</Text>
       <Text className="text-xl">
