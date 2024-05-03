@@ -71,7 +71,7 @@ export default function Page() {
   }, [items]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }} className="bg-picton-blue-600 h-full">
+    <SafeAreaView className="flex-1 bg-picton-blue-600 h-full">
       <Agenda
         items={items}
         loadItemsForMonth={loadItems}
