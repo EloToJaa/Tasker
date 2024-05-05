@@ -7,5 +7,9 @@
 	],
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "editor.formatOnSave": true
+    "[csharp]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": false,
+        "editor.maxTokenizationLineLength": 2500
+    }
 }

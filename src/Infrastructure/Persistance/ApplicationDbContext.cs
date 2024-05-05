@@ -5,6 +5,7 @@ using Domain.Training;
 using Domain.Part;
 using Domain.Execution;
 using Domain.Exercise;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Persistance;
 
@@ -22,6 +23,12 @@ public class ApplicationDbContext : DbContext
         modelBuilder
             .Ignore<List<IDomainEvent>>()
             .ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        modelBuilder.Model.GetEntityTypes()
+            .SelectMany(e => e.GetProperties())
+            .Where(p => p.IsPrimaryKey())
+            .ToList()
+            .ForEach(p => p.ValueGenerated = ValueGenerated.Never);
 
         base.OnModelCreating(modelBuilder);
     }

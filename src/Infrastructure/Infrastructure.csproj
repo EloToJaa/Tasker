@@ -4,17 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Persistance\Configuration\**" />
-    <Compile Remove="Persistance\Repositories\**" />
-    <EmbeddedResource Remove="Persistance\Configuration\**" />
-    <EmbeddedResource Remove="Persistance\Repositories\**" />
-    <None Remove="Persistance\Configuration\**" />
-    <None Remove="Persistance\Repositories\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
@@ -30,7 +21,7 @@
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
-		<Compile Include="..\..\AssemblyInfo.cs" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs" />
+  </ItemGroup>
 </Project>

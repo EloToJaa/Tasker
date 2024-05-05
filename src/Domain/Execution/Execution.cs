@@ -31,4 +31,10 @@ public sealed class Execution : AggregateRoot<ExecutionId, Guid>
 
         CompletionDate = DateTime.UtcNow;
     }
+
+#pragma warning disable CS8618
+    private Execution()
+    {
+    }
+#pragma warning restore CS8618
 }
