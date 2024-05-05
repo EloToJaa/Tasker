@@ -127,7 +127,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SetExerciseIds",
+                name: "TrainingSetExerciseIds",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -137,9 +137,9 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SetExerciseIds", x => x.Id);
+                    table.PrimaryKey("PK_TrainingSetExerciseIds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SetExerciseIds_Sets_SetId_TrainingId",
+                        name: "FK_TrainingSetExerciseIds_Sets_SetId_TrainingId",
                         columns: x => new { x.SetId, x.TrainingId },
                         principalTable: "Sets",
                         principalColumns: new[] { "SetId", "TrainingId" },
@@ -152,14 +152,14 @@ namespace Infrastructure.Migrations
                 column: "PartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SetExerciseIds_SetId_TrainingId",
-                table: "SetExerciseIds",
-                columns: new[] { "SetId", "TrainingId" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Sets_TrainingId",
                 table: "Sets",
                 column: "TrainingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainingSetExerciseIds_SetId_TrainingId",
+                table: "TrainingSetExerciseIds",
+                columns: new[] { "SetId", "TrainingId" });
         }
 
         /// <inheritdoc />
@@ -175,7 +175,7 @@ namespace Infrastructure.Migrations
                 name: "PartExerciseIds");
 
             migrationBuilder.DropTable(
-                name: "SetExerciseIds");
+                name: "TrainingSetExerciseIds");
 
             migrationBuilder.DropTable(
                 name: "Parts");

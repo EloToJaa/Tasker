@@ -33,7 +33,7 @@ public sealed class TrainingConfiguration : IEntityTypeConfiguration<Training>
 
             sb.OwnsMany(s => s.ExerciseIds, eb =>
             {
-                eb.ToTable("SetExerciseIds");
+                eb.ToTable("TrainingSetExerciseIds");
 
                 eb.WithOwner().HasForeignKey("SetId", "TrainingId");
 

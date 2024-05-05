@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240505203135_InitialSchema")]
+    [Migration("20240505221521_InitialSchema")]
     partial class InitialSchema
     {
         /// <inheritdoc />
@@ -263,7 +263,7 @@ namespace Infrastructure.Migrations
 
                                     b2.HasIndex("SetId", "TrainingId");
 
-                                    b2.ToTable("SetExerciseIds", (string)null);
+                                    b2.ToTable("TrainingSetExerciseIds", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("SetId", "TrainingId");

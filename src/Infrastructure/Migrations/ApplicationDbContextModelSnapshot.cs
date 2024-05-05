@@ -260,7 +260,7 @@ namespace Infrastructure.Migrations
 
                                     b2.HasIndex("SetId", "TrainingId");
 
-                                    b2.ToTable("SetExerciseIds", (string)null);
+                                    b2.ToTable("TrainingSetExerciseIds", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("SetId", "TrainingId");
