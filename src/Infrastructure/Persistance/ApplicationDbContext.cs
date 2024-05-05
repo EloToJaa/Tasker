@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistance.Interceptors;
 using Domain.Common.Models;
+using Domain.Training;
+using Domain.Part;
+using Domain.Execution;
+using Domain.Exercise;
 
 namespace Infrastructure.Persistance;
 
@@ -27,4 +31,9 @@ public class ApplicationDbContext : DbContext
         optionsBuilder.AddInterceptors(_publishDomainEventsInterceptor);
         base.OnConfiguring(optionsBuilder);
     }
+
+    public DbSet<Training> Trainings { get; set; } = null!;
+    public DbSet<Part> Parts { get; set; } = null!;
+    public DbSet<Execution> Executions { get; set; } = null!;
+    public DbSet<Exercise> Exercises { get; set; } = null!;
 }
