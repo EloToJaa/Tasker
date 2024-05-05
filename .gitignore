@@ -10,6 +10,13 @@ npm-debug.*
 *.orig.*
 web-build/
 %ProgramData%/
+**/.vs
+**/bin
+**/obj
+**/logs
+**/.containers
+**/.env
+**/secrets.json
 
 # macOS
 .DS_Store
