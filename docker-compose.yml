@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  application.api:
-    image: ${DOCKER_REGISTRY-}application-api
-    container_name: application.api
+  tasker.api:
+    image: ${DOCKER_REGISTRY-}tasker-api
+    container_name: tasker.api
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -15,11 +15,11 @@ services:
       - 5000:5000
       - 5001:5001
 
-  application.database:
+  tasker.database:
     image: postgres:16.1-alpine3.19
-    container_name: application.database
+    container_name: tasker.database
     environment:
-      - POSTGRES_DB=application
+      - POSTGRES_DB=tasker
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
@@ -27,9 +27,9 @@ services:
     ports:
       - 5432:5432
 
-  application.logs:
+  tasker.logs:
     image: datalust/seq
-    container_name: application.logs
+    container_name: tasker.logs
     environment:
       - ACCEPT_EULA=Y
     volumes:

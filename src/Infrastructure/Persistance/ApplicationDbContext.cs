@@ -1,6 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistance.Interceptors;
 using Domain.Common.Models;
+using Domain.Training;
+using Domain.Part;
+using Domain.Execution;
+using Domain.Exercise;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Persistance;
 
@@ -19,6 +24,12 @@ public class ApplicationDbContext : DbContext
             .Ignore<List<IDomainEvent>>()
             .ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
+        modelBuilder.Model.GetEntityTypes()
+            .SelectMany(e => e.GetProperties())
+            .Where(p => p.IsPrimaryKey())
+            .ToList()
+            .ForEach(p => p.ValueGenerated = ValueGenerated.Never);
+
         base.OnModelCreating(modelBuilder);
     }
 
@@ -27,4 +38,9 @@ public class ApplicationDbContext : DbContext
         optionsBuilder.AddInterceptors(_publishDomainEventsInterceptor);
         base.OnConfiguring(optionsBuilder);
     }
+
+    public DbSet<Training> Trainings { get; set; } = null!;
+    public DbSet<Part> Parts { get; set; } = null!;
+    public DbSet<Execution> Executions { get; set; } = null!;
+    public DbSet<Exercise> Exercises { get; set; } = null!;
 }
