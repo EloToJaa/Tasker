@@ -19,6 +19,7 @@ export default function Layout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="redirect" options={{ headerShown: true }} />
       </Stack>
       <StatusBar backgroundColor="#161622" style="light" />
     </ThemeProvider>

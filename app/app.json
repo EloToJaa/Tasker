@@ -14,6 +14,9 @@
       "expo-secure-store"
     ],
     "name": "tasker",
-    "slug": "tasker"
+    "slug": "tasker",
+    "android": {
+      "package": "com.elotoja.tasker"
+    }
   }
 }
