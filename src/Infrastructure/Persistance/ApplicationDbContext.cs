@@ -6,14 +6,15 @@ using Domain.Part;
 using Domain.Execution;
 using Domain.Exercise;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Application.Common.Interfaces;
 
 namespace Infrastructure.Persistance;
 
-public class ApplicationDbContext : DbContext
+public class IApplicationDbContext : DbContext, IApplicationDbContext
 {
     private readonly PublishDomainEventsInterceptor _publishDomainEventsInterceptor;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, PublishDomainEventsInterceptor publishDomainEventsInterceptor) : base(options)
+    public IApplicationDbContext(DbContextOptions<IApplicationDbContext> options, PublishDomainEventsInterceptor publishDomainEventsInterceptor) : base(options)
     {
         _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
     }
@@ -22,7 +23,7 @@ public class ApplicationDbContext : DbContext
     {
         modelBuilder
             .Ignore<List<IDomainEvent>>()
-            .ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            .ApplyConfigurationsFromAssembly(typeof(IApplicationDbContext).Assembly);
 
         modelBuilder.Model.GetEntityTypes()
             .SelectMany(e => e.GetProperties())

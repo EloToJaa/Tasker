@@ -4,15 +4,15 @@ namespace Infrastructure.Persistance;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IApplicationDbContext _context;
 
-    public UnitOfWork(ApplicationDbContext context)
+    public UnitOfWork(IApplicationDbContext context)
     {
         _context = context;
     }
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.Authentication;
 using Quartz;
 using Zitadel.Extensions;
+using Application.Common.Interfaces;
 
 namespace Infrastructure;
 
@@ -45,11 +46,13 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services
-            .AddDbContext<ApplicationDbContext>(options =>
+            .AddDbContext<Persistance.IApplicationDbContext>(options =>
             {
                 options
                     .UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
+
+        services.AddScoped<IApplicationDbContext, IApplicationDbContext>();
 
         services.AddScoped<PublishDomainEventsInterceptor>();
 
