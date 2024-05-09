@@ -1,6 +1,8 @@
 using Domain.Execution;
 using Domain.Execution.Entities;
 using Domain.Exercise;
+using Domain.Pupil;
+using Domain.Trainer;
 using Domain.Training;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -58,6 +60,18 @@ public sealed class ExecutionConfiguration : IEntityTypeConfiguration<Execution>
             .HasConversion(
                 id => id.Value,
                 value => TrainingId.Create(value)
+            );
+
+        builder.Property(e => e.PupilId)
+            .HasConversion(
+                id => id.Value,
+                value => PupilId.Create(value)
+            );
+
+        builder.Property(e => e.TrainerId)
+            .HasConversion(
+                id => id.Value,
+                value => TrainerId.Create(value)
             );
     }
 }

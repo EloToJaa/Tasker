@@ -1,3 +1,4 @@
+using Domain.Exercise;
 using Domain.Part;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -23,7 +24,8 @@ public sealed class PartConfiguration : IEntityTypeConfiguration<Part>
             eb.HasKey("Id");
 
             eb.Property(e => e.Value)
-                .HasColumnName("ExerciseId");
+                .HasColumnName("ExerciseId")
+                .ValueGeneratedNever();
         });
 
         builder.Metadata.FindNavigation(nameof(Part.ExerciseIds))!

@@ -6,10 +6,10 @@ namespace Domain.Part;
 
 public sealed class Part : AggregateRoot<PartId, Guid>
 {
-    private List<ExerciseId> _exerciseIds = new();
-
     public string Name { get; private set; }
     public string Description { get; private set; }
+
+    private List<ExerciseId> _exerciseIds = new();
     public IReadOnlyList<ExerciseId> ExerciseIds => _exerciseIds.AsReadOnly();
 
     private Part(PartId id, string name, string description, UserId createdBy) : base(id, createdBy)

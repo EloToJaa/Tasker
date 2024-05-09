@@ -45,6 +45,12 @@ namespace Infrastructure.Migrations
                     b.Property<int>("NumberOfExercises")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("PupilId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TrainerId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("TrainingId")
                         .HasColumnType("uuid");
 
@@ -52,9 +58,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -125,6 +128,53 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parts", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Pupil.Pupil", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TrainerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pupils", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Trainer.Trainer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trainers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Training.Training", b =>
@@ -254,6 +304,35 @@ namespace Infrastructure.Migrations
                         });
 
                     b.Navigation("ExerciseIds");
+                });
+
+            modelBuilder.Entity("Domain.Trainer.Trainer", b =>
+                {
+                    b.OwnsMany("Domain.Pupil.PupilId", "PupilIds", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .HasColumnType("integer");
+
+                            b1.Property<Guid>("TrainerId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uuid")
+                                .HasColumnName("PupilId");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("TrainerId");
+
+                            b1.ToTable("TrainerPupilIds", (string)null);
+
+                            b1.HasDiscriminator().HasValue("PupilId");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrainerId");
+                        });
+
+                    b.Navigation("PupilIds");
                 });
 
             modelBuilder.Entity("Domain.Training.Training", b =>

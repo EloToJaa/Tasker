@@ -1,31 +1,38 @@
 using Domain.Common.Models;
 using Domain.Common.ValueObjects;
+using Domain.Pupil;
 
 namespace Domain.Trainer;
 
-public sealed class Trainer : AggregateRoot<UserId, Guid>
+public sealed class Trainer : AggregateRoot<TrainerId, Guid>
 {
-    private readonly List<UserId> _pupils = new();
-    public IReadOnlyList<UserId> Pupils => _pupils.AsReadOnly();
+    private readonly List<PupilId> _pupilIds = new();
+    public IReadOnlyList<PupilId> PupilIds => _pupilIds.AsReadOnly();
 
-    private Trainer(UserId trainerId) : base(trainerId, trainerId)
+    private Trainer(TrainerId trainerId) : base(trainerId, trainerId.GetUserId())
     {
     }
 
-    public static Trainer Create(UserId trainerId)
+    public static Trainer Create(TrainerId trainerId)
     {
         return new Trainer(trainerId);
     }
 
-    public void AddUser(UserId userId, UserId updatedBy)
+    public void AddPupil(PupilId pupilId, UserId updatedBy)
     {
         base.Update(updatedBy);
-        _pupils.Add(userId);
+        _pupilIds.Add(pupilId);
     }
 
-    public void RemoveUser(UserId userId, UserId updatedBy)
+    public void RemovePupil(PupilId pupilId, UserId updatedBy)
     {
         base.Update(updatedBy);
-        _pupils.Remove(userId);
+        _pupilIds.Remove(pupilId);
     }
+
+#pragma warning disable CS8618
+    private Trainer()
+    {
+    }
+#pragma warning restore CS8618
 }

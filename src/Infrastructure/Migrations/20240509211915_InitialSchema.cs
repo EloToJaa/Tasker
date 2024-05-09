@@ -17,7 +17,8 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TrainingId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PupilId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TrainerId = table.Column<Guid>(type: "uuid", nullable: false),
                     DateToComplete = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CompletionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     NumberOfExercises = table.Column<int>(type: "integer", nullable: false),
@@ -67,6 +68,37 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Parts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pupils",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    TrainerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pupils", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trainers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trainers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -130,6 +162,25 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TrainerPupilIds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    TrainerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PupilId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrainerPupilIds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TrainerPupilIds_Trainers_TrainerId",
+                        column: x => x.TrainerId,
+                        principalTable: "Trainers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TrainingSets",
                 columns: table => new
                 {
@@ -162,6 +213,11 @@ namespace Infrastructure.Migrations
                 column: "PartId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TrainerPupilIds_TrainerId",
+                table: "TrainerPupilIds",
+                column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TrainingSets_TrainingId",
                 table: "TrainingSets",
                 column: "TrainingId");
@@ -180,6 +236,12 @@ namespace Infrastructure.Migrations
                 name: "PartExerciseIds");
 
             migrationBuilder.DropTable(
+                name: "Pupils");
+
+            migrationBuilder.DropTable(
+                name: "TrainerPupilIds");
+
+            migrationBuilder.DropTable(
                 name: "TrainingSets");
 
             migrationBuilder.DropTable(
@@ -187,6 +249,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Parts");
+
+            migrationBuilder.DropTable(
+                name: "Trainers");
 
             migrationBuilder.DropTable(
                 name: "Trainings");

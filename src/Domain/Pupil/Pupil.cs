@@ -1,26 +1,33 @@
 using Domain.Common.Models;
 using Domain.Common.ValueObjects;
+using Domain.Trainer;
 
 namespace Domain.Pupil;
 
-public sealed class Pupil : AggregateRoot<UserId, Guid>
+public sealed class Pupil : AggregateRoot<PupilId, Guid>
 {
-    public UserId TrainerId { get; set; }
+    public TrainerId TrainerId { get; set; }
 
-    public Pupil(UserId pupilId, UserId trainerId) : base(pupilId, pupilId)
+    public Pupil(PupilId pupilId, TrainerId trainerId) : base(pupilId, pupilId.GetUserId())
     {
         TrainerId = trainerId;
     }
 
-    public static Pupil Create(UserId pupilId, UserId trainerId)
+    public static Pupil Create(PupilId pupilId, TrainerId trainerId)
     {
         return new Pupil(pupilId, trainerId);
     }
 
-    public void Update(UserId trainerId, UserId updatedBy)
+    public void Update(TrainerId trainerId, UserId updatedBy)
     {
         base.Update(updatedBy);
 
         TrainerId = trainerId;
     }
+
+#pragma warning disable CS8618
+    private Pupil()
+    {
+    }
+#pragma warning restore CS8618
 }
