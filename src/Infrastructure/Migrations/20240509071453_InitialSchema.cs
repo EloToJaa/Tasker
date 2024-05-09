@@ -20,6 +20,8 @@ namespace Infrastructure.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     DateToComplete = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CompletionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    NumberOfExercises = table.Column<int>(type: "integer", nullable: false),
+                    Duration = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -87,6 +89,28 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ExecutionSets",
+                columns: table => new
+                {
+                    ExecutionSetId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ExecutionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Repetitions = table.Column<int>(type: "integer", nullable: false),
+                    Time = table.Column<int>(type: "integer", nullable: false),
+                    ExerciseId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExecutionSets", x => new { x.ExecutionSetId, x.ExecutionId });
+                    table.ForeignKey(
+                        name: "FK_ExecutionSets_Execution_ExecutionId",
+                        column: x => x.ExecutionId,
+                        principalTable: "Execution",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PartExerciseIds",
                 columns: table => new
                 {
@@ -106,10 +130,10 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sets",
+                name: "TrainingSets",
                 columns: table => new
                 {
-                    SetId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TrainingSetId = table.Column<Guid>(type: "uuid", nullable: false),
                     TrainingId = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Repetitions = table.Column<int>(type: "integer", nullable: false),
@@ -118,9 +142,9 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sets", x => new { x.SetId, x.TrainingId });
+                    table.PrimaryKey("PK_TrainingSets", x => new { x.TrainingSetId, x.TrainingId });
                     table.ForeignKey(
-                        name: "FK_Sets_Trainings_TrainingId",
+                        name: "FK_TrainingSets_Trainings_TrainingId",
                         column: x => x.TrainingId,
                         principalTable: "Trainings",
                         principalColumn: "Id",
@@ -128,13 +152,18 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExecutionSets_ExecutionId",
+                table: "ExecutionSets",
+                column: "ExecutionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PartExerciseIds_PartId",
                 table: "PartExerciseIds",
                 column: "PartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sets_TrainingId",
-                table: "Sets",
+                name: "IX_TrainingSets_TrainingId",
+                table: "TrainingSets",
                 column: "TrainingId");
         }
 
@@ -142,7 +171,7 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Execution");
+                name: "ExecutionSets");
 
             migrationBuilder.DropTable(
                 name: "Exercises");
@@ -151,7 +180,10 @@ namespace Infrastructure.Migrations
                 name: "PartExerciseIds");
 
             migrationBuilder.DropTable(
-                name: "Sets");
+                name: "TrainingSets");
+
+            migrationBuilder.DropTable(
+                name: "Execution");
 
             migrationBuilder.DropTable(
                 name: "Parts");

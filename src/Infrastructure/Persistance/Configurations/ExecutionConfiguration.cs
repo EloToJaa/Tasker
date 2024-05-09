@@ -1,4 +1,6 @@
 using Domain.Execution;
+using Domain.Execution.Entities;
+using Domain.Exercise;
 using Domain.Training;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,6 +12,35 @@ public sealed class ExecutionConfiguration : IEntityTypeConfiguration<Execution>
     public void Configure(EntityTypeBuilder<Execution> builder)
     {
         ConfigureExecutionTable(builder);
+        ConfigureSetsTable(builder);
+    }
+
+    private void ConfigureSetsTable(EntityTypeBuilder<Execution> builder)
+    {
+        builder.OwnsMany(t => t.Sets, sb =>
+        {
+            sb.ToTable("ExecutionSets");
+
+            sb.WithOwner().HasForeignKey("ExecutionId");
+
+            sb.HasKey("Id", "ExecutionId");
+
+            sb.Property(s => s.Id)
+                .HasColumnName("ExecutionSetId")
+                .HasConversion(
+                    id => id.Value,
+                    value => ExecutionSetId.Create(value)
+                );
+
+            sb.Property(s => s.ExerciseId)
+                .HasConversion(
+                    id => id.Value,
+                    value => ExerciseId.Create(value)
+                );
+        });
+
+        builder.Metadata.FindNavigation(nameof(Training.Sets))!
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 
     private void ConfigureExecutionTable(EntityTypeBuilder<Execution> builder)

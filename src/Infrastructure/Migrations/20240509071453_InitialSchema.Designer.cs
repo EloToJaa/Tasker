@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240509062131_InitialSchema")]
+    [Migration("20240509071453_InitialSchema")]
     partial class InitialSchema
     {
         /// <inheritdoc />
@@ -41,6 +41,12 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("DateToComplete")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NumberOfExercises")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("TrainingId")
                         .HasColumnType("uuid");
@@ -161,6 +167,43 @@ namespace Infrastructure.Migrations
                     b.ToTable("Trainings", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Execution.Execution", b =>
+                {
+                    b.OwnsMany("Domain.Execution.Entities.ExecutionSet", "Sets", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("ExecutionSetId");
+
+                            b1.Property<Guid>("ExecutionId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Description")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<Guid>("ExerciseId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Repetitions")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Time")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("Id", "ExecutionId");
+
+                            b1.HasIndex("ExecutionId");
+
+                            b1.ToTable("ExecutionSets", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ExecutionId");
+                        });
+
+                    b.Navigation("Sets");
+                });
+
             modelBuilder.Entity("Domain.Exercise.Exercise", b =>
                 {
                     b.OwnsOne("Domain.Common.ValueObjects.Image", "Photo", b1 =>
@@ -218,11 +261,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Training.Training", b =>
                 {
-                    b.OwnsMany("Domain.Training.Entities.Set", "Sets", b1 =>
+                    b.OwnsMany("Domain.Training.Entities.TrainingSet", "Sets", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid")
-                                .HasColumnName("SetId");
+                                .HasColumnName("TrainingSetId");
 
                             b1.Property<Guid>("TrainingId")
                                 .HasColumnType("uuid");
@@ -244,7 +287,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasIndex("TrainingId");
 
-                            b1.ToTable("Sets", (string)null);
+                            b1.ToTable("TrainingSets", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("TrainingId");
