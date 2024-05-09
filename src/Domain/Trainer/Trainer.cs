@@ -1,31 +1,31 @@
 using Domain.Common.Models;
-using Domain.User;
+using Domain.Common.ValueObjects;
 
 namespace Domain.Trainer;
 
-public sealed class Trainer : AggregateRoot<TrainerId, Guid>
+public sealed class Trainer : AggregateRoot<UserId, Guid>
 {
-    private readonly List<UserId> _users = new();
-    public IReadOnlyList<UserId> Users => _users.AsReadOnly();
+    private readonly List<UserId> _pupils = new();
+    public IReadOnlyList<UserId> Pupils => _pupils.AsReadOnly();
 
-    private Trainer(TrainerId id) : base(id, id.Value)
+    private Trainer(UserId trainerId) : base(trainerId, trainerId)
     {
     }
 
-    public static Trainer Create(Guid trainerId)
+    public static Trainer Create(UserId trainerId)
     {
-        return new Trainer(TrainerId.Create(trainerId));
+        return new Trainer(trainerId);
     }
 
-    public void AddUser(UserId userId, Guid updatedBy)
+    public void AddUser(UserId userId, UserId updatedBy)
     {
         base.Update(updatedBy);
-        _users.Add(userId);
+        _pupils.Add(userId);
     }
 
-    public void RemoveUser(UserId userId, Guid updatedBy)
+    public void RemoveUser(UserId userId, UserId updatedBy)
     {
         base.Update(updatedBy);
-        _users.Remove(userId);
+        _pupils.Remove(userId);
     }
 }

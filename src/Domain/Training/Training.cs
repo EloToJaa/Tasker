@@ -1,4 +1,5 @@
 using Domain.Common.Models;
+using Domain.Common.ValueObjects;
 using Domain.Training.Entities;
 
 namespace Domain.Training;
@@ -12,7 +13,7 @@ public sealed class Training : AggregateRoot<TrainingId, Guid>
     public IReadOnlyList<TrainingSet> Sets => _sets.AsReadOnly();
     private readonly List<TrainingSet> _sets = new();
 
-    private Training(TrainingId id, string name, string description, Guid userId, List<TrainingSet> sets) : base(id, userId)
+    private Training(TrainingId id, string name, string description, UserId createdBy, List<TrainingSet> sets) : base(id, createdBy)
     {
         Id = id;
         Name = name;
@@ -23,14 +24,14 @@ public sealed class Training : AggregateRoot<TrainingId, Guid>
         Duration = sets.Sum(s => s.Time);
     }
 
-    public static Training Create(string name, string description, Guid userId, List<TrainingSet> sets)
+    public static Training Create(string name, string description, UserId createdBy, List<TrainingSet> sets)
     {
-        return new Training(TrainingId.CreateUnique(), name, description, userId, sets);
+        return new Training(TrainingId.CreateUnique(), name, description, createdBy, sets);
     }
 
-    public void Update(string name, string description, Guid userId, List<TrainingSet> sets)
+    public void Update(string name, string description, UserId updatedBy, List<TrainingSet> sets)
     {
-        base.Update(userId);
+        base.Update(updatedBy);
 
         Name = name;
         Description = description;

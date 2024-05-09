@@ -11,7 +11,7 @@ public sealed class Exercise : AggregateRoot<ExerciseId, Guid>
     public Image Photo { get; private set; }
     public PartId PartId { get; private set; }
 
-    private Exercise(ExerciseId id, string name, string description, Image photo, PartId partId, Guid userId) : base(id, userId)
+    private Exercise(ExerciseId id, string name, string description, Image photo, PartId partId, UserId createdBy) : base(id, createdBy)
     {
         Id = id;
         Name = name;
@@ -20,14 +20,14 @@ public sealed class Exercise : AggregateRoot<ExerciseId, Guid>
         PartId = partId;
     }
 
-    public static Exercise Create(string name, string description, Image photo, PartId partId, Guid userId)
+    public static Exercise Create(string name, string description, Image photo, PartId partId, UserId createdBy)
     {
-        return new Exercise(ExerciseId.CreateUnique(), name, description, photo, partId, userId);
+        return new Exercise(ExerciseId.CreateUnique(), name, description, photo, partId, createdBy);
     }
 
-    public void Update(string name, string description, Image photo, PartId partId, Guid userId)
+    public void Update(string name, string description, Image photo, PartId partId, UserId updatedBy)
     {
-        base.Update(userId);
+        base.Update(updatedBy);
 
         Name = name;
         Description = description;

@@ -1,4 +1,6 @@
-﻿namespace Domain.Common.Models;
+﻿using Domain.Common.ValueObjects;
+
+namespace Domain.Common.Models;
 
 public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
     where TId : AggregateRootId<TIdType>
@@ -6,12 +8,12 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
     public new AggregateRootId<TIdType> Id { get; protected set; }
 
     public DateTime CreatedAt { get; protected set; }
-    public Guid CreatedBy { get; protected set; }
+    public UserId CreatedBy { get; protected set; }
 
     public DateTime UpdatedAt { get; protected set; }
-    public Guid UpdatedBy { get; protected set; }
+    public UserId UpdatedBy { get; protected set; }
 
-    protected AggregateRoot(TId id, Guid createdBy)
+    protected AggregateRoot(TId id, UserId createdBy)
     {
         Id = id;
         CreatedAt = DateTime.UtcNow;
@@ -20,7 +22,7 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
         UpdatedBy = createdBy;
     }
 
-    protected void Update(Guid updatedBy)
+    protected void Update(UserId updatedBy)
     {
         UpdatedAt = DateTime.UtcNow;
         UpdatedBy = updatedBy;

@@ -1,6 +1,6 @@
 using Domain.Common.Models;
 
-namespace Domain.User;
+namespace Domain.Common.ValueObjects;
 
 public sealed class UserId : AggregateRootId<Guid>
 {
