@@ -8,7 +8,7 @@ using Domain.Exercise;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Application.Common.Interfaces;
 using Domain.Trainer;
-using Domain.User;
+using Domain.Pupil;
 
 namespace Infrastructure.Persistance;
 
@@ -47,5 +47,5 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Execution> Executions { get; set; } = null!;
     public DbSet<Exercise> Exercises { get; set; } = null!;
     public DbSet<Trainer> Trainers { get; set; } = null!;
-    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Pupil> Pupils { get; set; } = null!;
 }
