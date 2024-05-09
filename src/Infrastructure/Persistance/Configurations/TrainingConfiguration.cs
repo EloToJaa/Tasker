@@ -28,7 +28,7 @@ public sealed class TrainingConfiguration : IEntityTypeConfiguration<Training>
                 .HasColumnName("SetId")
                 .HasConversion(
                     id => id.Value,
-                    value => SetId.Create(value)
+                    value => TrainingSetId.Create(value)
                 );
 
             sb.Property(s => s.ExerciseId)

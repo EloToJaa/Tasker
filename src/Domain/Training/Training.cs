@@ -9,34 +9,35 @@ public sealed class Training : AggregateRoot<TrainingId, Guid>
     public string Description { get; private set; }
     public int NumberOfExercises { get; private set; }
     public int Duration { get; private set; }
-    public IReadOnlyList<Set> Sets => _sets.AsReadOnly();
-    private readonly List<Set> _sets = new();
+    public IReadOnlyList<TrainingSet> Sets => _sets.AsReadOnly();
+    private readonly List<TrainingSet> _sets = new();
 
-    private Training(TrainingId id, string name, string description, Guid userId) : base(id, userId)
+    private Training(TrainingId id, string name, string description, Guid userId, List<TrainingSet> sets) : base(id, userId)
     {
         Id = id;
         Name = name;
         Description = description;
+        _sets.AddRange(sets);
 
-        NumberOfExercises = 0;
-        Duration = 0;
+        NumberOfExercises = sets.Count;
+        Duration = sets.Sum(s => s.Time);
     }
 
-    public static Training Create(string name, string description, Guid userId)
+    public static Training Create(string name, string description, Guid userId, List<TrainingSet> sets)
     {
-        return new Training(TrainingId.CreateUnique(), name, description, userId);
+        return new Training(TrainingId.CreateUnique(), name, description, userId, sets);
     }
 
-    public void Update(string name, string description, Guid userId, List<Set> sets)
+    public void Update(string name, string description, Guid userId, List<TrainingSet> sets)
     {
         base.Update(userId);
 
         Name = name;
         Description = description;
+
         _sets.Clear();
         _sets.AddRange(sets);
-
-        NumberOfExercises = 0;
+        NumberOfExercises = sets.Count;
         Duration = _sets.Sum(s => s.Time);
     }
 
