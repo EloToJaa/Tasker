@@ -18,9 +18,4 @@ public sealed class PupilId : AggregateRootId<Guid>
     {
         return UserId.Create(Value);
     }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
 }

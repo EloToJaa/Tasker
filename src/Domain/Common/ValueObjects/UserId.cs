@@ -13,11 +13,6 @@ public sealed class UserId : EntityId<Guid>
         return new UserId(value);
     }
 
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
-
     // #pragma warning disable CS8618
     //     private UserId()
     //     {

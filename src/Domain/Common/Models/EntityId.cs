@@ -2,7 +2,7 @@
 
 public abstract class EntityId<TId> : ValueObject
 {
-    public TId Value { get; }
+    public TId Value { get; private set; }
 
     protected EntityId(TId value)
     {

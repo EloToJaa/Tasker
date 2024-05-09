@@ -18,9 +18,4 @@ public sealed class TrainerId : AggregateRootId<Guid>
     {
         return UserId.Create(Value);
     }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
 }

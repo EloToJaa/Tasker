@@ -17,9 +17,4 @@ public sealed class ExecutionId : AggregateRootId<Guid>
     {
         return new ExecutionId(Guid.NewGuid());
     }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
 }

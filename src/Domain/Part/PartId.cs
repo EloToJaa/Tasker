@@ -18,8 +18,4 @@ public sealed class PartId : AggregateRootId<Guid>
         return new PartId(Guid.NewGuid());
     }
 
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
 }

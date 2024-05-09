@@ -17,9 +17,4 @@ public sealed class TrainingSetId : EntityId<Guid>
     {
         return new TrainingSetId(Guid.NewGuid());
     }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
 }

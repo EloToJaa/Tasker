@@ -17,9 +17,4 @@ public sealed class ExecutionSetId : EntityId<Guid>
     {
         return new ExecutionSetId(Guid.NewGuid());
     }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
 }
