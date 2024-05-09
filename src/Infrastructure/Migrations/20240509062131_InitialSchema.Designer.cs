@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(IApplicationDbContext))]
-    [Migration("20240505221521_InitialSchema")]
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20240509062131_InitialSchema")]
     partial class InitialSchema
     {
         /// <inheritdoc />
@@ -207,6 +207,8 @@ namespace Infrastructure.Migrations
 
                             b1.ToTable("PartExerciseIds", (string)null);
 
+                            b1.HasDiscriminator().HasValue("ExerciseId");
+
                             b1.WithOwner()
                                 .HasForeignKey("PartId");
                         });
@@ -229,6 +231,9 @@ namespace Infrastructure.Migrations
                                 .IsRequired()
                                 .HasColumnType("text");
 
+                            b1.Property<Guid>("ExerciseId")
+                                .HasColumnType("uuid");
+
                             b1.Property<int>("Repetitions")
                                 .HasColumnType("integer");
 
@@ -243,33 +248,6 @@ namespace Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("TrainingId");
-
-                            b1.OwnsMany("Domain.Exercise.ExerciseId", "ExerciseIds", b2 =>
-                                {
-                                    b2.Property<int>("Id")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<Guid>("SetId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid?>("TrainingId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("Value")
-                                        .HasColumnType("uuid")
-                                        .HasColumnName("ExerciseId");
-
-                                    b2.HasKey("Id");
-
-                                    b2.HasIndex("SetId", "TrainingId");
-
-                                    b2.ToTable("TrainingSetExerciseIds", (string)null);
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("SetId", "TrainingId");
-                                });
-
-                            b1.Navigation("ExerciseIds");
                         });
 
                     b.Navigation("Sets");

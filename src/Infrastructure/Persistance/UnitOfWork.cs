@@ -4,9 +4,9 @@ namespace Infrastructure.Persistance;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly IApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public UnitOfWork(IApplicationDbContext context)
+    public UnitOfWork(ApplicationDbContext context)
     {
         _context = context;
     }

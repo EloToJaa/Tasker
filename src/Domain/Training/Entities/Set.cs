@@ -8,29 +8,18 @@ public sealed class Set : Entity<SetId>
     public string Description { get; private set; }
     public int Repetitions { get; private set; }
     public int Time { get; private set; }
-    public IReadOnlyList<ExerciseId> ExerciseIds => _exerciseIds.AsReadOnly();
+    public ExerciseId ExerciseId { get; private set; }
 
-    private readonly List<ExerciseId> _exerciseIds = new();
-
-    private Set(SetId id, string description, int repetitions, int time) : base(id)
+    private Set(SetId id, ExerciseId exerciseId, string description, int repetitions, int time) : base(id)
     {
         Description = description;
         Repetitions = repetitions;
         Time = time;
+        ExerciseId = exerciseId;
     }
 
-    public static Set Create(string description, int repetitions, int time)
+    public static Set Create(ExerciseId exerciseId, string description, int repetitions, int time)
     {
-        return new Set(SetId.CreateUnique(), description, repetitions, time);
-    }
-
-    public void AddExercise(ExerciseId exerciseId)
-    {
-        // _exerciseIds.Add(exerciseId);
-    }
-
-    public void RemoveExercise(ExerciseId exerciseId)
-    {
-        // _exerciseIds.Remove(exerciseId);
+        return new Set(SetId.CreateUnique(), exerciseId, description, repetitions, time);
     }
 }

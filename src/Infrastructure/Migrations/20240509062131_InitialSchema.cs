@@ -113,7 +113,8 @@ namespace Infrastructure.Migrations
                     TrainingId = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Repetitions = table.Column<int>(type: "integer", nullable: false),
-                    Time = table.Column<int>(type: "integer", nullable: false)
+                    Time = table.Column<int>(type: "integer", nullable: false),
+                    ExerciseId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,26 +127,6 @@ namespace Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TrainingSetExerciseIds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    SetId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TrainingId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ExerciseId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrainingSetExerciseIds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TrainingSetExerciseIds_Sets_SetId_TrainingId",
-                        columns: x => new { x.SetId, x.TrainingId },
-                        principalTable: "Sets",
-                        principalColumns: new[] { "SetId", "TrainingId" },
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_PartExerciseIds_PartId",
                 table: "PartExerciseIds",
@@ -155,11 +136,6 @@ namespace Infrastructure.Migrations
                 name: "IX_Sets_TrainingId",
                 table: "Sets",
                 column: "TrainingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TrainingSetExerciseIds_SetId_TrainingId",
-                table: "TrainingSetExerciseIds",
-                columns: new[] { "SetId", "TrainingId" });
         }
 
         /// <inheritdoc />
@@ -175,13 +151,10 @@ namespace Infrastructure.Migrations
                 name: "PartExerciseIds");
 
             migrationBuilder.DropTable(
-                name: "TrainingSetExerciseIds");
+                name: "Sets");
 
             migrationBuilder.DropTable(
                 name: "Parts");
-
-            migrationBuilder.DropTable(
-                name: "Sets");
 
             migrationBuilder.DropTable(
                 name: "Trainings");

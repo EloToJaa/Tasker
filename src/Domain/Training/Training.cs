@@ -5,7 +5,6 @@ namespace Domain.Training;
 
 public sealed class Training : AggregateRoot<TrainingId, Guid>
 {
-
     public string Name { get; private set; }
     public string Description { get; private set; }
     public int NumberOfExercises { get; private set; }

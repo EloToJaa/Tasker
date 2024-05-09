@@ -46,13 +46,13 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services
-            .AddDbContext<Persistance.IApplicationDbContext>(options =>
+            .AddDbContext<ApplicationDbContext>(options =>
             {
                 options
                     .UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
 
-        services.AddScoped<IApplicationDbContext, IApplicationDbContext>();
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         services.AddScoped<PublishDomainEventsInterceptor>();
 

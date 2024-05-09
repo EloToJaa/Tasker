@@ -31,21 +31,11 @@ public sealed class TrainingConfiguration : IEntityTypeConfiguration<Training>
                     value => SetId.Create(value)
                 );
 
-            sb.OwnsMany(s => s.ExerciseIds, eb =>
-            {
-                eb.ToTable("TrainingSetExerciseIds");
-
-                eb.WithOwner().HasForeignKey("SetId", "TrainingId");
-
-                eb.Property<int>("Id");
-                eb.HasKey("Id");
-
-                eb.Property(e => e.Value)
-                    .HasColumnName("ExerciseId");
-            });
-
-            sb.Navigation(s => s.ExerciseIds).Metadata.SetField("_exerciseIds");
-            sb.Navigation(s => s.ExerciseIds).UsePropertyAccessMode(PropertyAccessMode.Field);
+            sb.Property(s => s.ExerciseId)
+                .HasConversion(
+                    id => id.Value,
+                    value => ExerciseId.Create(value)
+                );
         });
 
         builder.Metadata.FindNavigation(nameof(Training.Sets))!

@@ -10,11 +10,11 @@ using Application.Common.Interfaces;
 
 namespace Infrastructure.Persistance;
 
-public class IApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     private readonly PublishDomainEventsInterceptor _publishDomainEventsInterceptor;
 
-    public IApplicationDbContext(DbContextOptions<IApplicationDbContext> options, PublishDomainEventsInterceptor publishDomainEventsInterceptor) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, PublishDomainEventsInterceptor publishDomainEventsInterceptor) : base(options)
     {
         _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
     }
@@ -23,7 +23,7 @@ public class IApplicationDbContext : DbContext, IApplicationDbContext
     {
         modelBuilder
             .Ignore<List<IDomainEvent>>()
-            .ApplyConfigurationsFromAssembly(typeof(IApplicationDbContext).Assembly);
+            .ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
         modelBuilder.Model.GetEntityTypes()
             .SelectMany(e => e.GetProperties())
