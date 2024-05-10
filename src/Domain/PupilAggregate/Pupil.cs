@@ -1,8 +1,8 @@
 using Domain.Common.Models;
 using Domain.Common.ValueObjects;
-using Domain.Trainer;
+using Domain.TrainerAggregate;
 
-namespace Domain.Pupil;
+namespace Domain.PupilAggregate;
 
 public sealed class Pupil : AggregateRoot<PupilId, Guid>
 {

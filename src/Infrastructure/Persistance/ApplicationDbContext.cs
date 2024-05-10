@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistance.Interceptors;
 using Domain.Common.Models;
-using Domain.Training;
-using Domain.Part;
-using Domain.Execution;
-using Domain.Exercise;
+using Domain.TrainingAggregate;
+using Domain.PartAggregate;
+using Domain.ExecutionAggregate;
+using Domain.ExerciseAggregate;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Application.Common.Interfaces;
-using Domain.Trainer;
-using Domain.Pupil;
+using Domain.TrainerAggregate;
+using Domain.PupilAggregate;
 
 namespace Infrastructure.Persistance;
 

@@ -1,6 +1,6 @@
 using Domain.Common.Models;
 
-namespace Domain.Execution;
+namespace Domain.ExecutionAggregate;
 
 public sealed class ExecutionId : AggregateRootId<Guid>
 {

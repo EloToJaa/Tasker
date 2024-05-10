@@ -1,9 +1,9 @@
-using Domain.Execution;
-using Domain.Execution.Entities;
-using Domain.Exercise;
-using Domain.Pupil;
-using Domain.Trainer;
-using Domain.Training;
+using Domain.ExecutionAggregate;
+using Domain.ExecutionAggregate.Entities;
+using Domain.ExerciseAggregate;
+using Domain.PupilAggregate;
+using Domain.TrainerAggregate;
+using Domain.TrainingAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

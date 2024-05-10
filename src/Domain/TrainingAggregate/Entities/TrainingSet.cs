@@ -1,7 +1,7 @@
 using Domain.Common.Models;
-using Domain.Exercise;
+using Domain.ExerciseAggregate;
 
-namespace Domain.Training.Entities;
+namespace Domain.TrainingAggregate.Entities;
 
 public sealed class TrainingSet : Entity<TrainingSetId>
 {

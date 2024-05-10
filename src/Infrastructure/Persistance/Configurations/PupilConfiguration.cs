@@ -1,6 +1,6 @@
 using Domain.Common.ValueObjects;
-using Domain.Pupil;
-using Domain.Trainer;
+using Domain.PupilAggregate;
+using Domain.TrainerAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

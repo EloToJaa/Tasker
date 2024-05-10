@@ -1,7 +1,7 @@
 using Domain.Common.Models;
 using Domain.Common.ValueObjects;
 
-namespace Domain.Pupil;
+namespace Domain.PupilAggregate;
 
 public sealed class PupilId : AggregateRootId<Guid>
 {

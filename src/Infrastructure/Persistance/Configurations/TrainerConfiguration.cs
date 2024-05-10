@@ -1,5 +1,5 @@
 using Domain.Common.ValueObjects;
-using Domain.Trainer;
+using Domain.TrainerAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

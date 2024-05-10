@@ -1,6 +1,6 @@
 using Domain.Common.Models;
 
-namespace Domain.Part;
+namespace Domain.PartAggregate;
 
 public sealed class PartId : AggregateRootId<Guid>
 {

@@ -1,5 +1,5 @@
-using Domain.Exercise;
-using Domain.Part;
+using Domain.ExerciseAggregate;
+using Domain.PartAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

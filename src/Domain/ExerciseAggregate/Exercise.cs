@@ -1,8 +1,8 @@
 using Domain.Common.Models;
 using Domain.Common.ValueObjects;
-using Domain.Part;
+using Domain.PartAggregate;
 
-namespace Domain.Exercise;
+namespace Domain.ExerciseAggregate;
 
 public sealed class Exercise : AggregateRoot<ExerciseId, Guid>
 {

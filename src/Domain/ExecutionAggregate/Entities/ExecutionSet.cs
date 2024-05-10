@@ -1,7 +1,7 @@
 using Domain.Common.Models;
-using Domain.Exercise;
+using Domain.ExerciseAggregate;
 
-namespace Domain.Execution.Entities;
+namespace Domain.ExecutionAggregate.Entities;
 
 public sealed class ExecutionSet : Entity<ExecutionSetId>
 {

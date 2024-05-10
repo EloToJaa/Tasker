@@ -1,6 +1,6 @@
 using Domain.Common.Models;
 
-namespace Domain.Training.Entities;
+namespace Domain.TrainingAggregate.Entities;
 
 public sealed class TrainingSetId : EntityId<Guid>
 {

@@ -1,6 +1,6 @@
-using Domain.Exercise;
-using Domain.Training;
-using Domain.Training.Entities;
+using Domain.ExerciseAggregate;
+using Domain.TrainingAggregate;
+using Domain.TrainingAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

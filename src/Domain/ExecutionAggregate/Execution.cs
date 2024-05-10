@@ -1,11 +1,10 @@
 using Domain.Common.Models;
-using Domain.Common.ValueObjects;
-using Domain.Execution.Entities;
-using Domain.Pupil;
-using Domain.Trainer;
-using Domain.Training;
+using Domain.ExecutionAggregate.Entities;
+using Domain.PupilAggregate;
+using Domain.TrainerAggregate;
+using Domain.TrainingAggregate;
 
-namespace Domain.Execution;
+namespace Domain.ExecutionAggregate;
 
 public sealed class Execution : AggregateRoot<ExecutionId, Guid>
 {

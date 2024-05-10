@@ -1,6 +1,6 @@
 using Domain.Common.Models;
 
-namespace Domain.Execution.Entities;
+namespace Domain.ExecutionAggregate.Entities;
 
 public sealed class ExecutionSetId : EntityId<Guid>
 {

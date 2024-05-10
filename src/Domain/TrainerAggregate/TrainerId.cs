@@ -1,7 +1,7 @@
 using Domain.Common.Models;
 using Domain.Common.ValueObjects;
 
-namespace Domain.Trainer;
+namespace Domain.TrainerAggregate;
 
 public sealed class TrainerId : AggregateRootId<Guid>
 {

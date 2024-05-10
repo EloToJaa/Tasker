@@ -1,6 +1,6 @@
 using Domain.Common.Models;
 
-namespace Domain.Training;
+namespace Domain.TrainingAggregate;
 
 public sealed class TrainingId : AggregateRootId<Guid>
 {
