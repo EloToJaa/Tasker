@@ -22,7 +22,7 @@ namespace Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Execution.Execution", b =>
+            modelBuilder.Entity("Domain.ExecutionAggregate.Execution", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -65,7 +65,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Execution", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Exercise.Exercise", b =>
+            modelBuilder.Entity("Domain.ExerciseAggregate.Exercise", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -99,7 +99,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Exercises", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Part.Part", b =>
+            modelBuilder.Entity("Domain.PartAggregate.Part", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -130,7 +130,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Parts", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Pupil.Pupil", b =>
+            modelBuilder.Entity("Domain.PupilAggregate.Pupil", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -155,7 +155,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Pupils", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Trainer.Trainer", b =>
+            modelBuilder.Entity("Domain.TrainerAggregate.Trainer", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -177,7 +177,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Trainers", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Training.Training", b =>
+            modelBuilder.Entity("Domain.TrainingAggregate.Training", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -214,9 +214,9 @@ namespace Infrastructure.Migrations
                     b.ToTable("Trainings", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Execution.Execution", b =>
+            modelBuilder.Entity("Domain.ExecutionAggregate.Execution", b =>
                 {
-                    b.OwnsMany("Domain.Execution.Entities.ExecutionSet", "Sets", b1 =>
+                    b.OwnsMany("Domain.ExecutionAggregate.Entities.ExecutionSet", "Sets", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid")
@@ -251,7 +251,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Sets");
                 });
 
-            modelBuilder.Entity("Domain.Exercise.Exercise", b =>
+            modelBuilder.Entity("Domain.ExerciseAggregate.Exercise", b =>
                 {
                     b.OwnsOne("Domain.Common.ValueObjects.Image", "Photo", b1 =>
                         {
@@ -277,9 +277,9 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Part.Part", b =>
+            modelBuilder.Entity("Domain.PartAggregate.Part", b =>
                 {
-                    b.OwnsMany("Domain.Exercise.ExerciseId", "ExerciseIds", b1 =>
+                    b.OwnsMany("Domain.ExerciseAggregate.ExerciseId", "ExerciseIds", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .HasColumnType("integer");
@@ -306,9 +306,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("ExerciseIds");
                 });
 
-            modelBuilder.Entity("Domain.Trainer.Trainer", b =>
+            modelBuilder.Entity("Domain.TrainerAggregate.Trainer", b =>
                 {
-                    b.OwnsMany("Domain.Pupil.PupilId", "PupilIds", b1 =>
+                    b.OwnsMany("Domain.PupilAggregate.PupilId", "PupilIds", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .HasColumnType("integer");
@@ -335,9 +335,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("PupilIds");
                 });
 
-            modelBuilder.Entity("Domain.Training.Training", b =>
+            modelBuilder.Entity("Domain.TrainingAggregate.Training", b =>
                 {
-                    b.OwnsMany("Domain.Training.Entities.TrainingSet", "Sets", b1 =>
+                    b.OwnsMany("Domain.TrainingAggregate.Entities.TrainingSet", "Sets", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid")
