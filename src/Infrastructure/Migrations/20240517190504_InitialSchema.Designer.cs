@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240510084106_InitialSchema")]
+    [Migration("20240517190504_InitialSchema")]
     partial class InitialSchema
     {
         /// <inheritdoc />
@@ -300,8 +300,6 @@ namespace Infrastructure.Migrations
 
                             b1.ToTable("PartExerciseIds", (string)null);
 
-                            b1.HasDiscriminator().HasValue("ExerciseId");
-
                             b1.WithOwner()
                                 .HasForeignKey("PartId");
                         });
@@ -328,8 +326,6 @@ namespace Infrastructure.Migrations
                             b1.HasIndex("TrainerId");
 
                             b1.ToTable("TrainerPupilIds", (string)null);
-
-                            b1.HasDiscriminator().HasValue("PupilId");
 
                             b1.WithOwner()
                                 .HasForeignKey("TrainerId");

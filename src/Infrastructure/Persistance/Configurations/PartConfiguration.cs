@@ -18,6 +18,7 @@ public sealed class PartConfiguration : IEntityTypeConfiguration<Part>
         builder.OwnsMany(p => p.ExerciseIds, eb =>
         {
             eb.ToTable("PartExerciseIds");
+            eb.OwnedEntityType.RemoveDiscriminatorValue();
 
             eb.WithOwner().HasForeignKey("PartId");
 

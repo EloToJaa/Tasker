@@ -30,6 +30,7 @@ public sealed class TrainerConfiguration : IEntityTypeConfiguration<Trainer>
         builder.OwnsMany(p => p.PupilIds, eb =>
         {
             eb.ToTable("TrainerPupilIds");
+            eb.OwnedEntityType.RemoveDiscriminatorValue();
 
             eb.WithOwner().HasForeignKey("TrainerId");
 

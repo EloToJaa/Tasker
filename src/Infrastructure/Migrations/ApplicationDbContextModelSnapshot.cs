@@ -297,8 +297,6 @@ namespace Infrastructure.Migrations
 
                             b1.ToTable("PartExerciseIds", (string)null);
 
-                            b1.HasDiscriminator().HasValue("ExerciseId");
-
                             b1.WithOwner()
                                 .HasForeignKey("PartId");
                         });
@@ -325,8 +323,6 @@ namespace Infrastructure.Migrations
                             b1.HasIndex("TrainerId");
 
                             b1.ToTable("TrainerPupilIds", (string)null);
-
-                            b1.HasDiscriminator().HasValue("PupilId");
 
                             b1.WithOwner()
                                 .HasForeignKey("TrainerId");
