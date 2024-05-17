@@ -1,15 +1,11 @@
-﻿using Application.Common.Interfaces.Persistance;
-using Application.Common.Interfaces.Services;
-using Infrastructure.Persistance.Interceptors;
+﻿using Application.Common.Interfaces.Services;
 using Infrastructure.Persistance;
 using Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.Authentication;
 using Quartz;
 using Zitadel.Extensions;
-using Application.Common.Interfaces;
 
 namespace Infrastructure;
 
@@ -37,33 +33,6 @@ public static class DependencyInjection
         {
             options.WaitForJobsToComplete = true;
         });
-
-        return services;
-    }
-
-    public static IServiceCollection AddPersistance(
-        this IServiceCollection services,
-        IConfiguration configuration)
-    {
-        services
-            .AddDbContext<ApplicationDbContext>(options =>
-                options
-                    .UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
-                    .UseSnakeCaseNamingConvention()
-            );
-
-        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
-
-        services.AddScoped<PublishDomainEventsInterceptor>();
-
-        services.AddRepositories();
-
-        return services;
-    }
-
-    private static IServiceCollection AddRepositories(this IServiceCollection services)
-    {
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
