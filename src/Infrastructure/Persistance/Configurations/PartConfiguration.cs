@@ -17,15 +17,15 @@ public sealed class PartConfiguration : IEntityTypeConfiguration<Part>
     {
         builder.OwnsMany(p => p.ExerciseIds, eb =>
         {
-            eb.ToTable("PartExerciseIds");
+            eb.ToTable("part_exercise_ids");
             eb.OwnedEntityType.RemoveDiscriminatorValue();
 
-            eb.WithOwner().HasForeignKey("PartId");
+            eb.WithOwner().HasForeignKey("part_id");
 
-            eb.HasKey("Id");
+            eb.HasKey(nameof(Part.Id));
 
             eb.Property(e => e.Value)
-                .HasColumnName("ExerciseId")
+                .HasColumnName("exercise_id")
                 .ValueGeneratedNever();
         });
 
@@ -35,7 +35,7 @@ public sealed class PartConfiguration : IEntityTypeConfiguration<Part>
 
     private void ConfigurePartTable(EntityTypeBuilder<Part> builder)
     {
-        builder.ToTable("Parts");
+        builder.ToTable("parts");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)

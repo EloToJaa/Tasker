@@ -14,7 +14,7 @@ public sealed class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
 
     private void ConfigureExerciseTable(EntityTypeBuilder<Exercise> builder)
     {
-        builder.ToTable("Exercises");
+        builder.ToTable("exercises");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)

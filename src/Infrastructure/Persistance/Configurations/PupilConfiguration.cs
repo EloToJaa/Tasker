@@ -15,7 +15,7 @@ public sealed class PupilConfiguration : IEntityTypeConfiguration<Pupil>
 
     private void ConfigurePupilTable(EntityTypeBuilder<Pupil> builder)
     {
-        builder.ToTable("Pupils");
+        builder.ToTable("pupils");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)

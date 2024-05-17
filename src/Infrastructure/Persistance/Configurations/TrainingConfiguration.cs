@@ -18,14 +18,14 @@ public sealed class TrainingConfiguration : IEntityTypeConfiguration<Training>
     {
         builder.OwnsMany(t => t.Sets, sb =>
         {
-            sb.ToTable("TrainingSets");
+            sb.ToTable("training_sets");
 
-            sb.WithOwner().HasForeignKey("TrainingId");
+            sb.WithOwner().HasForeignKey("training_id");
 
-            sb.HasKey("Id", "TrainingId");
+            sb.HasKey(nameof(Training.Id), "training_id");
 
             sb.Property(s => s.Id)
-                .HasColumnName("TrainingSetId")
+                .HasColumnName("training_set_id")
                 .HasConversion(
                     id => id.Value,
                     value => TrainingSetId.Create(value)
@@ -44,7 +44,7 @@ public sealed class TrainingConfiguration : IEntityTypeConfiguration<Training>
 
     private void ConfigureTrainingTable(EntityTypeBuilder<Training> builder)
     {
-        builder.ToTable("Trainings");
+        builder.ToTable("trainings");
 
         builder.HasKey(t => t.Id);
         builder.Property(t => t.Id)

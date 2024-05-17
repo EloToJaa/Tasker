@@ -21,14 +21,14 @@ public sealed class ExecutionConfiguration : IEntityTypeConfiguration<Execution>
     {
         builder.OwnsMany(t => t.Sets, sb =>
         {
-            sb.ToTable("ExecutionSets");
+            sb.ToTable("execution_sets");
 
-            sb.WithOwner().HasForeignKey("ExecutionId");
+            sb.WithOwner().HasForeignKey("execution_id");
 
-            sb.HasKey("Id", "ExecutionId");
+            sb.HasKey(nameof(Execution.Id), "execution_id");
 
             sb.Property(s => s.Id)
-                .HasColumnName("ExecutionSetId")
+                .HasColumnName("execution_set_id")
                 .HasConversion(
                     id => id.Value,
                     value => ExecutionSetId.Create(value)
@@ -47,7 +47,7 @@ public sealed class ExecutionConfiguration : IEntityTypeConfiguration<Execution>
 
     private void ConfigureExecutionTable(EntityTypeBuilder<Execution> builder)
     {
-        builder.ToTable("Execution");
+        builder.ToTable("execution");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)

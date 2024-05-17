@@ -15,7 +15,7 @@ public sealed class TrainerConfiguration : IEntityTypeConfiguration<Trainer>
 
     private void ConfigureTrainerTable(EntityTypeBuilder<Trainer> builder)
     {
-        builder.ToTable("Trainers");
+        builder.ToTable("trainers");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)
@@ -29,15 +29,15 @@ public sealed class TrainerConfiguration : IEntityTypeConfiguration<Trainer>
     {
         builder.OwnsMany(p => p.PupilIds, eb =>
         {
-            eb.ToTable("TrainerPupilIds");
+            eb.ToTable("trainer_pupil_ids");
             eb.OwnedEntityType.RemoveDiscriminatorValue();
 
-            eb.WithOwner().HasForeignKey("TrainerId");
+            eb.WithOwner().HasForeignKey("trainer_id");
 
-            eb.HasKey("Id");
+            eb.HasKey(nameof(Trainer.Id));
 
             eb.Property(e => e.Value)
-                .HasColumnName("PupilId")
+                .HasColumnName("pupil_id")
                 .ValueGeneratedNever();
         });
 
