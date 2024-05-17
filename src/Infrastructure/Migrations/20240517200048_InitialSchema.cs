@@ -11,8 +11,12 @@ namespace Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "api");
+
             migrationBuilder.CreateTable(
                 name: "execution",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -35,6 +39,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "exercises",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -55,6 +60,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "parts",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -72,6 +78,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "pupils",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -88,6 +95,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "trainers",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -103,6 +111,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "trainings",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -122,6 +131,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "execution_sets",
+                schema: "api",
                 columns: table => new
                 {
                     execution_set_id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -137,6 +147,7 @@ namespace Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_execution_sets_execution_execution_id",
                         column: x => x.execution_id,
+                        principalSchema: "api",
                         principalTable: "execution",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -144,6 +155,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "part_exercise_ids",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false),
@@ -156,6 +168,7 @@ namespace Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_part_exercise_ids_parts_part_id",
                         column: x => x.part_id,
+                        principalSchema: "api",
                         principalTable: "parts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -163,6 +176,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "trainer_pupil_ids",
+                schema: "api",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false),
@@ -175,6 +189,7 @@ namespace Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_trainer_pupil_ids_trainers_trainer_id",
                         column: x => x.trainer_id,
+                        principalSchema: "api",
                         principalTable: "trainers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -182,6 +197,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "training_sets",
+                schema: "api",
                 columns: table => new
                 {
                     training_set_id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -197,6 +213,7 @@ namespace Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_training_sets_trainings_training_id",
                         column: x => x.training_id,
+                        principalSchema: "api",
                         principalTable: "trainings",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -204,21 +221,25 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_execution_sets_execution_id",
+                schema: "api",
                 table: "execution_sets",
                 column: "execution_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_part_exercise_ids_part_id",
+                schema: "api",
                 table: "part_exercise_ids",
                 column: "part_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_trainer_pupil_ids_trainer_id",
+                schema: "api",
                 table: "trainer_pupil_ids",
                 column: "trainer_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_training_sets_training_id",
+                schema: "api",
                 table: "training_sets",
                 column: "training_id");
         }
@@ -227,34 +248,44 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "execution_sets");
+                name: "execution_sets",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "exercises");
+                name: "exercises",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "part_exercise_ids");
+                name: "part_exercise_ids",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "pupils");
+                name: "pupils",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "trainer_pupil_ids");
+                name: "trainer_pupil_ids",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "training_sets");
+                name: "training_sets",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "execution");
+                name: "execution",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "parts");
+                name: "parts",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "trainers");
+                name: "trainers",
+                schema: "api");
 
             migrationBuilder.DropTable(
-                name: "trainings");
+                name: "trainings",
+                schema: "api");
         }
     }
 }

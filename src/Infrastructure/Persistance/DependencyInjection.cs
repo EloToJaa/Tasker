@@ -16,7 +16,9 @@ public static class DependencyInjection
         services
             .AddDbContext<ApplicationDbContext>(options =>
                 options
-                    .UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                    .UseNpgsql(
+                        configuration.GetConnectionString("DefaultConnection"),
+                        c => c.MigrationsHistoryTable("__migrations_history", Schemas.Api))
                     .UseSnakeCaseNamingConvention()
             );
 

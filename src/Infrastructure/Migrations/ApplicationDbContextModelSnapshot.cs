@@ -17,6 +17,7 @@ namespace Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("api")
                 .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -75,7 +76,7 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_execution");
 
-                    b.ToTable("execution", (string)null);
+                    b.ToTable("execution", "api");
                 });
 
             modelBuilder.Entity("Domain.ExerciseAggregate.Exercise", b =>
@@ -118,7 +119,7 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_exercises");
 
-                    b.ToTable("exercises", (string)null);
+                    b.ToTable("exercises", "api");
                 });
 
             modelBuilder.Entity("Domain.PartAggregate.Part", b =>
@@ -157,7 +158,7 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_parts");
 
-                    b.ToTable("parts", (string)null);
+                    b.ToTable("parts", "api");
                 });
 
             modelBuilder.Entity("Domain.PupilAggregate.Pupil", b =>
@@ -189,7 +190,7 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_pupils");
 
-                    b.ToTable("pupils", (string)null);
+                    b.ToTable("pupils", "api");
                 });
 
             modelBuilder.Entity("Domain.TrainerAggregate.Trainer", b =>
@@ -217,7 +218,7 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_trainers");
 
-                    b.ToTable("trainers", (string)null);
+                    b.ToTable("trainers", "api");
                 });
 
             modelBuilder.Entity("Domain.TrainingAggregate.Training", b =>
@@ -264,7 +265,7 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_trainings");
 
-                    b.ToTable("trainings", (string)null);
+                    b.ToTable("trainings", "api");
                 });
 
             modelBuilder.Entity("Domain.ExecutionAggregate.Execution", b =>
@@ -302,7 +303,7 @@ namespace Infrastructure.Migrations
                             b1.HasIndex("execution_id")
                                 .HasDatabaseName("ix_execution_sets_execution_id");
 
-                            b1.ToTable("execution_sets", (string)null);
+                            b1.ToTable("execution_sets", "api");
 
                             b1.WithOwner()
                                 .HasForeignKey("execution_id")
@@ -331,7 +332,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasKey("ExerciseId");
 
-                            b1.ToTable("exercises");
+                            b1.ToTable("exercises", "api");
 
                             b1.WithOwner()
                                 .HasForeignKey("ExerciseId")
@@ -364,7 +365,7 @@ namespace Infrastructure.Migrations
                             b1.HasIndex("part_id")
                                 .HasDatabaseName("ix_part_exercise_ids_part_id");
 
-                            b1.ToTable("part_exercise_ids", (string)null);
+                            b1.ToTable("part_exercise_ids", "api");
 
                             b1.WithOwner()
                                 .HasForeignKey("part_id")
@@ -396,7 +397,7 @@ namespace Infrastructure.Migrations
                             b1.HasIndex("trainer_id")
                                 .HasDatabaseName("ix_trainer_pupil_ids_trainer_id");
 
-                            b1.ToTable("trainer_pupil_ids", (string)null);
+                            b1.ToTable("trainer_pupil_ids", "api");
 
                             b1.WithOwner()
                                 .HasForeignKey("trainer_id")
@@ -441,7 +442,7 @@ namespace Infrastructure.Migrations
                             b1.HasIndex("training_id")
                                 .HasDatabaseName("ix_training_sets_training_id");
 
-                            b1.ToTable("training_sets", (string)null);
+                            b1.ToTable("training_sets", "api");
 
                             b1.WithOwner()
                                 .HasForeignKey("training_id")
