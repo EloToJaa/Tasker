@@ -1,4 +1,3 @@
-using Application.Common.Interfaces.Persistance;
 using Infrastructure.Persistance.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +24,6 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         services.AddScoped<PublishDomainEventsInterceptor>();
-
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 using MediatR;
-using Application.Common.Interfaces.Persistance;
+using Application.Common.Interfaces;
 
 namespace Application.Common.Behaviors;
 
@@ -9,11 +9,11 @@ public sealed class UnitOfWorkBehavior<TRequest, TResponse> :
         where TRequest : IRequest<TResponse>
         where TResponse : IErrorOr
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IApplicationDbContext _context;
 
-    public UnitOfWorkBehavior(IUnitOfWork unitOfWork)
+    public UnitOfWorkBehavior(IApplicationDbContext context)
     {
-        _unitOfWork = unitOfWork;
+        _context = context;
     }
 
     public async Task<TResponse> Handle(
@@ -26,7 +26,7 @@ public sealed class UnitOfWorkBehavior<TRequest, TResponse> :
 
         var result = await next();
 
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
         return result;
     }

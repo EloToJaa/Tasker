@@ -12,10 +12,4 @@ public sealed class UserId : EntityId<Guid>
     {
         return new UserId(value);
     }
-
-    // #pragma warning disable CS8618
-    //     private UserId()
-    //     {
-    //     }
-    // #pragma warning restore CS8618
 }
