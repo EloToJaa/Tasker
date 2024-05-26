@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Quizer.Application.Common.Settings;
+using Application.Common.Settings;
 using Refit;
 using System.Net.Http.Headers;
 

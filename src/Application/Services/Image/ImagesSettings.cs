@@ -1,4 +1,4 @@
-﻿namespace Quizer.Application.Common.Settings;
+﻿namespace Application.Common.Settings;
 
 public class ImagesSettings
 {
